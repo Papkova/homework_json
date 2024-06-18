@@ -10,7 +10,7 @@ app = FastAPI()
 class Book(BaseModel):
     id: int
     title: str
-    year: int = Field(..., gt=1600, le=datetime.now().year)
+    year: int = Field(..., gt=1500, le=datetime.now().year)
     author: str
     genre: str
     page_count: int = Field(..., gt=0)
