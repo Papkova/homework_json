@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, ValidationError, field_validator
+from pydantic import BaseModel, ValidationError, field_validator, Field
 from typing import Any
 from datetime import datetime
 from fastapi.responses import JSONResponse
@@ -8,19 +8,12 @@ from fastapi.responses import JSONResponse
 app = FastAPI()
 
 class Book(BaseModel):
+    id: int
     title: str
+    year: int = Field(..., gt=1600, le=datetime.now().year)
     author: str
-    year: int
-    isbn: str = None
-
-    @field_validator('year')
-    @classmethod
-    def year_big(cls, value: Any):
-        years = datetime.now().year
-        if not (1500 > value <= years):
-            raise ValueError("Рік видання книги повинний бути від 1500 до поточного року")
-        return value
-
+    genre: str
+    page_count: int = Field(..., gt=0)
 
 @app.post("/book/")
 def create_item(book: Book):
