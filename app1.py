@@ -60,4 +60,6 @@ def update_task(task_id: int, task_update: TaskUpdate):
                 task.title = task_update.title
             if task_update.description is not None:
                 task.description = task_update.description
-            if  task_update.status
+            if  task_update.status is not None:
+                task.status = task_update.status
+
