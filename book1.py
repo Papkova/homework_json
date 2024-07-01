@@ -7,6 +7,7 @@ from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
+
 class Book(BaseModel):
     id: int
     title: str
@@ -14,6 +15,7 @@ class Book(BaseModel):
     author: str
     genre: str
     page_count: int = Field(..., gt=0)
+
 
 @app.post("/book/")
 def create_item(book: Book):

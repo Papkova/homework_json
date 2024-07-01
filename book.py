@@ -7,7 +7,6 @@ from datetime import datetime
 app = FastAPI()
 
 
-
 class Book(BaseModel):
     id: int
     title: str
@@ -23,6 +22,7 @@ class CreateBook(BaseModel):
     author: str
     genre: str
     page_count: int = Field(..., gt=0)
+
 
 class UpdateBook(BaseModel):
     title: str = None
